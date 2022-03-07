@@ -24,10 +24,6 @@ class CreatePostsTable extends Migration
             $table->timestamps();
 
             $table->softDeletes();
-
-            $table->index('category_id', 'post_categiry_idx');
-            $table->foreign('category_id', 'post_category_fk')
-                ->on('categories')->references('id');
         });
     }
 
