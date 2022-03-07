@@ -13,6 +13,7 @@ class PostController extends Controller
     public function index(){
 
         $posts = Post::where("is_published", '1')->get();
+        //dd(current($posts)[0]->tags);
         return view('post.index', compact('posts'));
     }
 
