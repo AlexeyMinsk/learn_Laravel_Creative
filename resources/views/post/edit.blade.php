@@ -32,6 +32,7 @@
             </div>
             <select class="form-select" aria-label="Default select example"
                     id="category_id" name="category_id">
+                <option value="0"></option>
                 @foreach($categories as $category)
                     <option value="{{$category->id}}"{{$post->category_id===$category->id? " selected": ""}}>
                         {{$category->title}}</option>
@@ -44,9 +45,18 @@
             <select class="form-select" aria-label="Default select example"
                     name="tags[]" id="tags" multiple>
                 @foreach($tags as $tag)
-                    <option value="{{$tag->id}}"
-                        {{in_array($tag->id, $selectTagIds)? " selected": ""}}>
-                        {{$tag->title}}</option>
+                    @php
+                        $tagId = $tag->id;
+                            $select = $post->tags->contains(function ($item) use ($tagId){
+                                if($item->id === $tagId){
+                                    return true;
+                                }
+                                return false;
+                            })
+                    @endphp
+                    <option value="{{$tag->id}}"{{$select? " selected": ""}}>
+                        {{$tag->title}}
+                    </option>
                 @endforeach
             </select>
             @error('tags')

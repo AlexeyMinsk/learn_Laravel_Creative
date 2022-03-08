@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
-use App\Models\PostTag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     public function index(){
 
         $posts = Post::where("is_published", '1')->get();
-        //dd(current($posts)[0]->tags);
         return view('post.index', compact('posts'));
     }
 
@@ -29,13 +28,9 @@ class PostController extends Controller
 
     public function edit(Post $post){
 
-        $selectTagIds = [];
-        foreach(PostTag::where('post_id', $post->id)->get() as $postTag){
-            $selectTagIds[] = $postTag->tag_id;
-        }
-        $tags = Tag::all();//Tag::where('id', $tagIds)->get();
+        $tags = Tag::all();
         $categories = Category::all();
-        return view('post.edit', compact('post', 'tags', 'categories', 'selectTagIds'));
+        return view('post.edit', compact('post', 'tags', 'categories'));
     }
 
     public function store(){
@@ -45,7 +40,7 @@ class PostController extends Controller
             "content" => "required|string",
             "image" => "required|string",
             "tags" => "",
-            "category_id" => "required|int",
+            "category_id" => "int",
         ]);
 
         if(isset($data['tags'])) {
@@ -69,7 +64,7 @@ class PostController extends Controller
             "content" => "required|string",
             "image" => "required|string",
             "tags" => "",
-            "category_id" => "required|int",
+            "category_id" => "int",
         ]);
 
         if(isset($data['tags'])) {
@@ -89,11 +84,10 @@ class PostController extends Controller
 
         $postId = $post->id;
         $post->delete();
-        $postTags = PostTag::where("post_id", $postId)->get();
+        //DB::table('post_tag')->where('post_id', '=', $postId)->delete();
+        DB::table('post_tag')->where('post_id', '=', $postId)
+            ->update(["deleted_at" => new \DateTime()]);
 
-        foreach($postTags as $postTag){
-            $postTag->delete();
-        }
         return redirect()->route('post.index');
     }
 
