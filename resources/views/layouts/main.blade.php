@@ -23,14 +23,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('post.index') }}">Posts list</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('category.index') }}">Category list</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('tag.index') }}">Tag list</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Post action
+                            Actions
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('post.create') }}">Crete new post</a></li>
-                            <li><a class="dropdown-item" href="{{ route('post.take_out_trash') }}">Refresh posts</a></li>
-{{--                            <li><hr class="dropdown-divider"></li>--}}
+                            <li><a class="dropdown-item" href="{{ route('category.create') }}">Crete new category</a></li>
+                            <li><a class="dropdown-item" href="{{ route('tag.create') }}">Crete new tag</a></li>
+                            <li><a class="dropdown-item" href="{{ route('post.take_out_trash') }}">To throw out the trash</a></li>
+                            <li><a class="dropdown-item" href="{{ route('post.get_out_trash') }}">get out of the trash</a></li>
+
+                            {{--                            <li><hr class="dropdown-divider"></li>--}}
 {{--                            <li><a class="dropdown-item" href="#">Something else here</a></li>--}}
                         </ul>
                     </li>
