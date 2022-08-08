@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
     public function index(){
-
         $posts = Post::where("is_published", '1')->get();
         return view('post.index', compact('posts'));
     }
@@ -27,15 +26,18 @@ class PostController extends Controller
     }
 
     public function edit(Post $post){
-
         $tags = Tag::all();
         $categories = Category::all();
         return view('post.edit', compact('post', 'tags', 'categories'));
     }
 
-    public function store(){
-
-        $data = \request()->validate([
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request){
+        //dd($request);
+        $data = $request->validate([
             "title" => "required|string",
             "content" => "required|string",
             "image" => "required|string",
@@ -50,7 +52,7 @@ class PostController extends Controller
 
         $post = Post::create($data);
 
-        if(isset($tags)) {
+        if(isset($tags) && $post) {
             $post->tags()->attach($tags, ['created_at' => new \DateTime('now')]);
         }
         return redirect()->route('post.index');

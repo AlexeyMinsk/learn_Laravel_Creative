@@ -48,10 +48,7 @@
                     @php
                         $tagId = $tag->id;
                             $select = $post->tags->contains(function ($item) use ($tagId){
-                                if($item->id === $tagId){
-                                    return true;
-                                }
-                                return false;
+                                return $item->id === $tagId;
                             })
                     @endphp
                     <option value="{{$tag->id}}"{{$select? " selected": ""}}>
@@ -66,7 +63,7 @@
                 <div class="detached-block-1">
                     <button type="submit" class="btn btn-primary">Save</button>
                     <button type="reset" class="btn btn-primary">Reset</button>
-                    <a type="reset" class="btn btn-primary"
+                    <a class="btn btn-primary"
                        href="{{route("post.detail", ["post" => $post->id])}}">Cancel</a>
                 </div>
             </div>

@@ -37,8 +37,8 @@
                             <li><a class="dropdown-item" href="{{ route('post.create') }}">Crete new post</a></li>
                             <li><a class="dropdown-item" href="{{ route('category.create') }}">Crete new category</a></li>
                             <li><a class="dropdown-item" href="{{ route('tag.create') }}">Crete new tag</a></li>
-                            <li><a class="dropdown-item" href="{{ route('post.take_out_trash') }}">To throw out the trash</a></li>
-                            <li><a class="dropdown-item" href="{{ route('post.get_out_trash') }}">get out of the trash</a></li>
+                            <li><a class="dropdown-item" href="{{ route('post.empty-trash') }}">To throw out the trash</a></li>
+                            <li><a class="dropdown-item" href="{{ route('post.restore-from-trash') }}">get out of the trash</a></li>
 
                             {{--                            <li><hr class="dropdown-divider"></li>--}}
 {{--                            <li><a class="dropdown-item" href="#">Something else here</a></li>--}}
