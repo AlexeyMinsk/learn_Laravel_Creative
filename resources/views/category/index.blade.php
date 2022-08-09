@@ -8,6 +8,11 @@
             <form action="{{route('category.destroy')}}" method="POST">
                 @csrf
                 @method('delete')
+
+                @if(isset($_GET['error']))
+                    <p>{{$_GET['error']}}</p>
+                @endif
+
             @foreach($categories as $category)
                 <div class="row">
                     <div class="col-12 col-sm-6">

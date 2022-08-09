@@ -13,45 +13,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 Route::get('/', function(){
     return view('home');
 })->name('index');
 
+Route::group(['namespace' => 'Post'], function(){
+
+    Route::get('/post', "IndexController")->name('post.index');
+    Route::get('/post/create', "CreateController")->name('post.create');
+    Route::get('/post/{post}', "DetailController")->name('post.detail');
+    Route::post('/post', "StoreController")->name('post.store');
+    Route::patch('/post/{post}', "UpdateController")->name('post.update');
+    Route::delete('/post/{post}', "DestroyController")->name('post.destroy');
+    Route::get('/post/{post}/edit', "EditController")->name('post.edit');
+});
+
+Route::group(['namespace' => 'Category'], function(){
+
+    Route::get('/category', "IndexController")->name('category.index');
+    Route::get('/category/create', "CreateController")->name('category.create');
+    Route::post('/category', "StoreController")->name('category.store');
+    Route::delete('/category/', "DestroyController")->name('category.destroy');
+});
+
+Route::group(["namespace" => "Tag"], function(){
+
+    Route::get('/tag', "IndexController")->name('tag.index');
+    Route::get('/tag/create', "CreateController")->name('tag.create');
+    Route::post('/tag', "StoreController")->name('tag.store');
+    Route::delete('/tag/{tag}', "DestroyController")->name('tag.destroy');
+});
+
 Route::get('/post/empty-trash', function(){
     App\Models\Post::onlyTrashed()->forceDelete();
-    //App\Models\Category::onlyTrashed()->forceDelete();
-    //App\Models\Tag::onlyTrashed()->forceDelete();
     return redirect()->route('post.index');
 })->name('post.empty-trash');
 
 Route::get('/post/restore-from-trash', function(){
     App\Models\Post::onlyTrashed()->restore();
-    //App\Models\Category::onlyTrashed()->restore();
-    //App\Models\Tag::onlyTrashed()->restore();
     return redirect()->route('post.index');
 })->name('post.restore-from-trash');
-
-Route::get('/post', "PostController@index")->name('post.index');
-Route::get('/post/create', "PostController@create")->name('post.create');
-Route::get('/post/{post}', "PostController@detail")->name('post.detail');
-Route::post('/post', "PostController@store")->name('post.store');
-Route::patch('/post/{post}', "PostController@update")->name('post.update');
-Route::delete('/post/{post}', "PostController@destroy")->name('post.destroy');
-Route::get('/post/{post}/edit', "PostController@edit")->name('post.edit');
-
-Route::get('/category', "CategoryController@index")->name('category.index');
-Route::get('/category/create', "CategoryController@create")->name('category.create');
-Route::post('/category', "CategoryController@store")->name('category.store');
-Route::delete('/category', "CategoryController@destroy")->name('category.destroy');
-
-Route::get('/tag', "TagController@index")->name('tag.index');
-Route::get('/tag/create', "TagController@create")->name('tag.create');
-Route::post('/tag', "TagController@store")->name('tag.store');
-Route::delete('/tag/{tag}', "TagController@destroy")->name('tag.destroy');
-
-
-
