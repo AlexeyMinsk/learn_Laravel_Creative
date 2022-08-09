@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Category;
 
 use App\Models\Category;
 
-class CreateController extends \App\Http\Controllers\Controller
+class CreateController extends BaseController
 {
     function __invoke()
     {

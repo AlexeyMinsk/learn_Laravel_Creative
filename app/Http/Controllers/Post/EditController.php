@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Post;
 
-class EditController extends \App\Http\Controllers\Controller
+class EditController extends BaseController
 {
     function __invoke(Post $post)
     {

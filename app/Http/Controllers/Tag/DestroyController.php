@@ -6,7 +6,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 
-class DestroyController extends \App\Http\Controllers\Controller
+class DestroyController extends BaseController
 {
     function __invoke(Tag $tag)
     {

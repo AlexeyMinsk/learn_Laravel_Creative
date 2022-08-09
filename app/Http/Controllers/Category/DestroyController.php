@@ -6,7 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DestroyController extends \App\Http\Controllers\Controller
+class DestroyController extends BaseController
 {
     function __invoke(Request $request)
     {

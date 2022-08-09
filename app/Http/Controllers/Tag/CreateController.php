@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tag;
 use App\Models\Category;
 use App\Models\Tag;
 
-class CreateController extends \App\Http\Controllers\Controller
+class CreateController extends BaseController
 {
     function __invoke()
     {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Post;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 
-class DestroyController extends \App\Http\Controllers\Controller
+class DestroyController extends BaseController
 {
     function __invoke(Post $post)
     {

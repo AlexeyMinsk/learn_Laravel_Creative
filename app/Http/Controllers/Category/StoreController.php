@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Http\Requests\Category\StoreRequest;
 
-class StoreController extends \App\Http\Controllers\Controller
+class StoreController extends BaseController
 {
-    function __invoke(Request $request)
+    function __invoke(StoreRequest $request)
     {
-        $data = \request()->validate([
-            "title" => "required|string",
-        ]);
-
-        $category = Category::firstOrCreate($data);
+        $data = $request->validated();
+        $this->service->store($data);
         return redirect()->route('category.create');
     }
 }

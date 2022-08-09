@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Post;
 
 use App\Models\Post;
 
-class DetailController extends \App\Http\Controllers\Controller
+class DetailController extends BaseController
 {
     function __invoke(Post $post)
     {

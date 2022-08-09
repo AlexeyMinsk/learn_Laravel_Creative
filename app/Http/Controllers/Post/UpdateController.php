@@ -2,30 +2,16 @@
 
 namespace App\Http\Controllers\Post;
 
+use App\Http\Requests\Post\UpdateRequest;
 use App\Models\Post;
 
-class UpdateController extends \App\Http\Controllers\Controller
+class UpdateController extends BaseController
 {
-    function __invoke(Post $post)
+    function __invoke(UpdateRequest $request, Post $post)
     {
-        $data = \request()->validate([
-            "title" => "required|string",
-            "content" => "required|string",
-            "image" => "required|string",
-            "tags" => "",
-            "category_id" => "int",
-        ]);
+        $data = $request->validated();
+        $this->service->update($post, $data);
 
-        if(isset($data['tags'])) {
-            $tags = $data['tags'];
-            unset($data['tags']);
-        }
-
-        $post->update($data);
-
-        if(isset($tags)) {
-            $post->tags()->sync($tags, ['updated_at' => new \DateTime('now')]);
-        }
         return redirect()->route('post.detail', ["post" => $post->id]);
     }
 }

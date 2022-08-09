@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tag;
 use App\Models\Post;
 use App\Models\Tag;
 
-class IndexController extends \App\Http\Controllers\Controller
+class IndexController extends BaseController
 {
     function __invoke()
     {
